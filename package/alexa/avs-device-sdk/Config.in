@@ -1,0 +1,169 @@
+config BR2_PACKAGE_AVS_DEVICE_SDK
+	select BR2_PACKAGE_LIBCURL
+	select BR2_PACKAGE_NGHTTP2
+	select BR2_PACKAGE_OPENSSL
+	select BR2_PACKAGE_SQLITE
+	select BR2_PACKAGE_NTP
+	select BR2_PACKAGE_NTP_NTPD
+	select BR2_PACKAGE_GSTREAMER1
+	select BR2_PACKAGE_GSTREAMER1_PARSE
+	select BR2_PACKAGE_GSTREAMER1_TRACE
+	select BR2_PACKAGE_GSTREAMER1_GST_DEBUG
+	select BR2_PACKAGE_GSTREAMER1_PLUGIN_REGISTRY
+	select BR2_PACKAGE_GSTREAMER1_INSTALL_TOOLS
+	select BR2_PACKAGE_GST1_PLUGINS_BASE
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_APP
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_AUDIOCONVERT
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_AUDIOTESTSRC
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_PLAYBACK
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_AUDIORESAMPLE
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_RAWPARSE
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_TYPEFIND
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_VOLUME
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_ALSA
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_OGG
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_OPUS
+	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_VORBIS
+	select BR2_PACKAGE_GST1_PLUGINS_GOOD
+	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_AUDIOPARSERS
+	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_AUTODETECT
+	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_EQUALIZER
+	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_ID3DEMUX
+	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_ISOMP4
+	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_WAVENC
+	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_WAVPARSE
+	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_FLAC
+	select BR2_PACKAGE_GST1_PLUGINS_BAD
+	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_AUDIOMIXER
+	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_AUTOCONVERT
+	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_MPEGTSDEMUX
+	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_MPEGTSMUX
+	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_RAWPARSE
+	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_FAAD
+	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_HLS
+	select BR2_PACKAGE_GST1_PLUGINS_UGLY
+	select BR2_PACKAGE_GST1_LIBAV
+	select BR2_PACKAGE_PORTAUDIO
+	select BR2_PACKAGE_PORTAUDIO_ALSA
+	select BR2_PACKAGE_PORTAUDIO_CXX
+	bool "AVS DEVICE SDK"
+	help
+        avs device sdk
+        https://github.com/alexa/avs-device-sdk
+        apl-core-library
+        https://github.com/alexa/apl-core-library
+        alexa smart screen sdk
+        https://github.com/alexa/alexa-smart-screen-sdk
+
+if BR2_PACKAGE_AVS_DEVICE_SDK
+config BR2_PACKAGE_AVS_DEVICE_SDK_VERSION
+	string "alexa device sdk version"
+        default "master"
+config BR2_PACKAGE_AVS_DEVICE_SDK_CAPTIONS
+        depends on BR2_PACKAGE_ALEXA_WEBVTT
+        bool "CAPTIONS"
+        default n
+        help
+        https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#captions
+config BR2_PACKAGE_AVS_DEVICE_SDK_MRM
+        depends on BR2_PACKAGE_MRM
+        bool "MRM"
+        default n
+        help
+        Enable alexa device sdk with MRM(Multi-room-music)
+        https://developer.amazon.com/en-US/docs/alexa/mrm/multi-room-music-sdk-overview.html
+config BR2_PACKAGE_AVS_DEVICE_SDK_OPUS
+        select BR2_PACKAGE_OPUS
+        bool "OPUS"
+        default n
+        help
+        https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#opus
+config BR2_PACKAGE_AVS_DEVICE_SDK_DENABLE_ALL_ENDPOINT_CONTROLLERS
+        bool "DENABLE_ALL_ENDPOINT_CONTROLLERS"
+        default n
+		help
+		Use the following CMake parameters to enable Smart Home endpoints in your build.
+		https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#endpoints
+if BR2_PACKAGE_AVS_DEVICE_SDK_DENABLE_ALL_ENDPOINT_CONTROLLERS
+config BR2_PACKAGE_AVS_DEVICE_SDK_TOGGLE_CAPABILITY
+        bool "TOGGLE_CAPABILITY"
+        default n
+		help
+		https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#toggle_capability
+config BR2_PACKAGE_AVS_DEVICE_SDK_MODE_CONTROLLER
+        bool "MODE_CONTROLLER"
+        default n
+		help
+		https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#mode_controller
+config BR2_PACKAGE_AVS_DEVICE_SDK_RANGE_CONTROLLER
+        bool "RANGE_CONTROLLER"
+        default n
+		help
+		https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#range_controller
+endif   #if BR2_PACKAGE_AVS_DEVICE_SDK_DENABLE_ALL_ENDPOINT_CONTROLLERS
+		
+config BR2_PACKAGE_AVS_DEVICE_SDK_DISABLE_DUCKING
+        bool "DISABLE_DUCKING"
+        default n
+        help
+        v1.21.0 support
+        https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#disable_ducking
+config BR2_PACKAGE_AVS_DEVICE_SDK_LOW_POWER_MODE
+        bool "LOW_POWER_MODE"
+        default n
+        help
+        v1.21.0 support
+        https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#low_power_mode
+config BR2_PACKAGE_AVS_DEVICE_SDK_METRICS
+        bool "METRICS"
+        default n
+        help
+        https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#metrics
+choice
+    prompt "CMAKE_BUILD_TYPE"
+    default BR2_PACKAGE_AVS_DEVICE_SDK_CMAKE_BUILD_TYPE_DEBUG
+    help
+        Release type: DEBUG,RELEASE
+    config BR2_PACKAGE_AVS_DEVICE_SDK_CMAKE_BUILD_TYPE_RELEASE
+        bool "RELEASE"
+    config BR2_PACKAGE_AVS_DEVICE_SDK_CMAKE_BUILD_TYPE_DEBUG
+        bool "DEBUG"
+endchoice
+
+config BR2_PACKAGE_AVS_DEVICE_SDK_CMAKE_BUILD_TYPE
+    string
+    default "DEBUG"    if BR2_PACKAGE_AVS_DEVICE_SDK_CMAKE_BUILD_TYPE_DEBUG
+    default "RELEASE"  if BR2_PACKAGE_AVS_DEVICE_SDK_CMAKE_BUILD_TYPE_RELEASE
+
+config BR2_PACKAGE_AVS_DEVICE_SDK_ENABLE_ACSDK_EMIT_SENSITIVE_LOGS
+        depends on BR2_PACKAGE_AVS_DEVICE_SDK_CMAKE_BUILD_TYPE_DEBUG
+        bool "ACSDK_EMIT_SENSITIVE_LOGS"
+        default n
+config BR2_PACKAGE_AVS_DEVICE_SDK_DIAGNOSTICS
+        depends on BR2_PACKAGE_AVS_DEVICE_SDK_CMAKE_BUILD_TYPE_DEBUG
+        bool "DIAGNOSTICS"
+        default n
+        help
+        Enable diagnostics tools – file audio injection, protocol trace, and device properties aggregation.
+        Access these through the diagnostic menu, by pressing o after starting and authorizing the sample app.
+        Audio injection replaces a real microphone and can't be used if another microphone, such as PortAudio,
+        is enabled. Note that these tools are available in DEBUG mode only, and must not be enabled in devices built for release.
+        https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#diagnostics
+if BR2_PACKAGE_AVS_DEVICE_SDK_DIAGNOSTICS
+config BR2_PACKAGE_AVS_DEVICE_SDK_AUDIO_INJECTION
+        bool "AUDIO_INJECTION"
+        default n
+		help
+		Enable audio inject for file-in audio test
+config BR2_PACKAGE_AVS_DEVICE_SDK_DEVICE_PROPERTIES
+        bool "DEVICE_PROPERTIES"
+        default n
+		help
+		DEVICE_PROPERTIES
+config BR2_PACKAGE_AVS_DEVICE_SDK_PROTOCOL_TRACE
+        bool "PROTOCOL_TRACE"
+        default n
+		help
+		PROTOCOL_TRACE
+endif #if BR2_PACKAGE_AVS_DEVICE_SDK_DIAGNOSTICS
+endif #if BR2_PACKAGE_AVS_DEVICE_SDK

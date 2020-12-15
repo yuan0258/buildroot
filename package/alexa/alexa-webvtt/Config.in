@@ -1,0 +1,11 @@
+config BR2_PACKAGE_ALEXA_WEBVTT
+	bool "Alexa WEBVTT"
+	help
+        alexa webvtt for caption
+        https://github.com/alexa/webvtt.git
+
+if BR2_PACKAGE_ALEXA_WEBVTT
+config BR2_PACKAGE_ALEXA_WEBVTT_VERSION
+	string "alexa webvtt version"
+	default "master"
+endif

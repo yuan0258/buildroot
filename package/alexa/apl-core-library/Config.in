@@ -1,0 +1,15 @@
+config BR2_PACKAGE_APL_CORE_LIBRARY
+	bool "AVS CORE LIBRARY"
+	help
+        avs device sdk
+        https://github.com/alexa/avs-device-sdk
+        apl-core-library
+        https://github.com/alexa/apl-core-library
+        alexa smart screen sdk
+        https://github.com/alexa/alexa-smart-screen-sdk
+
+if BR2_PACKAGE_APL_CORE_LIBRARY
+config BR2_PACKAGE_APL_CORE_LIBRARY_VERSION
+        string "apl core library version"
+        default "master"
+endif

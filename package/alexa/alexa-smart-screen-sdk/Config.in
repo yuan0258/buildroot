@@ -1,0 +1,49 @@
+config BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK
+	depends on BR2_PACKAGE_AVS_DEVICE_SDK && BR2_PACKAGE_APL_CORE_LIBRARY
+	bool "ALEXA_SMART_SCREEN_SDK"
+	help
+        avs device sdk
+        https://github.com/alexa/avs-device-sdk
+        apl-core-library
+        https://github.com/alexa/apl-core-library
+        alexa smart screen sdk
+        https://github.com/alexa/alexa-smart-screen-sdk
+
+if BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK
+config BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_VERSION
+	string "alexa smart screen sdk version"
+	default "master"
+config BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_CAPTIONS
+        depends on BR2_PACKAGE_ALEXA_WEBVTT
+        bool "CAPTIONS"
+        default n
+        help
+        https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#captions
+config BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_MRM
+        depends on BR2_PACKAGE_MRM
+        bool "MRM"
+        default n
+        help
+        Enable alexa smart screen sdk with MRM(Multi-room-music)
+        https://developer.amazon.com/en-US/docs/alexa/mrm/multi-room-music-sdk-overview.html
+config BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_OPUS
+        select BR2_PACKAGE_OPUS
+        bool "OPUS"
+        default n
+        help
+        https://developer.amazon.com/en-US/docs/alexa/avs-device-sdk/cmake-parameters.html#additional-options
+choice
+    prompt "CMAKE_BUILD_TYPE"
+    default BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_CMAKE_BUILD_TYPE_DEBUG
+    help
+        Release type: DEBUG,RELEASE
+    config BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_CMAKE_BUILD_TYPE_RELEASE
+        bool "RELEASE"
+    config BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_CMAKE_BUILD_TYPE_DEBUG
+        bool "DEBUG"
+endchoice
+config BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_CMAKE_BUILD_TYPE
+    string
+    default "DEBUG"    if BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_CMAKE_BUILD_TYPE_DEBUG
+    default "RELEASE"  if BR2_PACKAGE_ALEXA_SMART_SCREEN_SDK_CMAKE_BUILD_TYPE_RELEASE
+endif
